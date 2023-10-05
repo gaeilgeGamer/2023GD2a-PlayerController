@@ -43,6 +43,15 @@ public class AdvancedPlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         body.velocity = new Vector2(horizontalInput*speed, body.velocity.y);
         anim.SetBool("walk", horizontalInput !=0);
+
+        if((horizontalInput>0&& !facingRight)||(horizontalInput<0&&facingRight))
+        {
+            Flip();
+        }
+        if(Input.GetKey(KeyCode.Space)&& grounded)
+        {
+            Jump();
+        }
     }
     private void Flip(){
         Vector3 currentScale = gameObject.transform.localScale; 
