@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class AdvancedPlayerMovement : MonoBehaviour
 {
     public float speed = 10f;
@@ -44,6 +45,11 @@ public class AdvancedPlayerMovement : MonoBehaviour
         body.velocity = new Vector2(horizontalInput*speed, body.velocity.y);
         anim.SetBool("walk", horizontalInput !=0);
 
+        if(horizontalInput != 0 && grounded)
+        {
+            PlaySound(footstepSound);
+        }
+
         if(Input.GetKeyDown(KeyCode.Space)&& grounded)
         {
             canDoubleJump = true; 
@@ -85,5 +91,11 @@ public class AdvancedPlayerMovement : MonoBehaviour
         body.velocity = new Vector2(body.velocity.x, jumpHeight);
         anim.SetTrigger("jump");
         grounded = false;
+        PlaySound(jumpSound);
+    }
+    private void PlaySound(AudioClip clip)
+    {
+        audioSource.clip = clip; 
+        audioSource.Play();
     }
 }
