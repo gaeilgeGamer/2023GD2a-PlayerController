@@ -66,6 +66,10 @@ public class AdvancedPlayerMovement : MonoBehaviour
         {
             Flip();
         }
+        if(Input.GetKey(KeyCode.LeftShift) && !isDashing)
+        {
+            StartCoroutine(Dash());
+        }
         if (Input.GetKeyDown(KeyCode.DownArrow)&& grounded)
         {
             if(!isCrouching){
@@ -92,6 +96,16 @@ public class AdvancedPlayerMovement : MonoBehaviour
         anim.SetTrigger("jump");
         grounded = false;
         PlaySound(jumpSound);
+    }
+
+    IEnumerator Dash(){
+        PlaySound(dashSound);
+        float originalSpeed = speed; 
+        speed = dashSpeed; 
+        isDashing = true; 
+        yield return new WaitForSeconds(0.2f);
+        speed = originalSpeed; 
+        isDashing = false; 
     }
     private void PlaySound(AudioClip clip)
     {
