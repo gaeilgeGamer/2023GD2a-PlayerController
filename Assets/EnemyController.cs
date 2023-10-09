@@ -34,7 +34,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Move();  
     }
     void Move(){
         Vector2 groundCheckPosition = movingRight ?
@@ -42,6 +42,15 @@ public class EnemyController : MonoBehaviour
             new Vector2(transform.position.x - 0.5f, transform.position.y);
 
             bool isGrounded = Physics2D.Raycast(groundCheckPosition, Vector2.down, groundCheckDistance, whatIsGround);
+
+            if(!isGrounded)
+            {
+                movingRight =!movingRight;
+            }
+
+            enemyRigidBody.velocity = movingRight ?
+            new Vector2(moveSpeed, enemyRigidBody.velocity.y):
+            new Vector2(-moveSpeed, enemyRigidBody.velocity.y);
     }
 
 }
