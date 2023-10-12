@@ -288,7 +288,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 2
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1288,6 +1288,11 @@ MonoBehaviour:
   jumpSound: {fileID: 0}
   dashSound: {fileID: 0}
   footstepSound: {fileID: 0}
+  attackDamage: 1
+  attackRange: 1
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 128
   grounded: 0
   canDoubleJump: 0
 --- !u!82 &2126369824

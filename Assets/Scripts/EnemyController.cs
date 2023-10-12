@@ -52,5 +52,27 @@ public class EnemyController : MonoBehaviour
             new Vector2(moveSpeed, enemyRigidBody.velocity.y):
             new Vector2(-moveSpeed, enemyRigidBody.velocity.y);
     }
-
+    public void TakeDamage(int damageAmount)
+    {
+        currentHealth -= damageAmount; 
+        if (currentHealth <=0)
+        {
+            Die();
+        }
+    }
+    public void Die()
+    {
+        if(spawner !=null)
+        {
+            spawner.EnemyDied();
+        }
+        Destroy(gameObject);
+    }
+private void OnCollisionEnter2D(Collision2D other) {
+AdvancedPlayerMovement player = other.gameObject.GetComponent<AdvancedPlayerMovement>();
+if(player != null)
+{
+    Debug.Log($"Player took {damage} from enemy");
+}    
+}
 }
