@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4451133992539079184}
   - component: {fileID: 872764416119635337}
   - component: {fileID: 8766566066407554333}
+  - component: {fileID: -7894070739978932721}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -193,3 +194,15 @@ MonoBehaviour:
     m_Bits: 64
   maxHealth: 5
   damage: 1
+--- !u!114 &-7894070739978932721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5331299405846389499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e928a17963ed1a3468d15b1fd1b0cf99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
