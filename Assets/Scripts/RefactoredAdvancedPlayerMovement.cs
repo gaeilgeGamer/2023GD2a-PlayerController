@@ -3,7 +3,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(AudioSource))]
 public class RefactoredAdvancedPlayerMovement : MonoBehaviour
 {
 
@@ -31,7 +30,6 @@ public class RefactoredAdvancedPlayerMovement : MonoBehaviour
     
     private Rigidbody2D body; 
     private Animator anim;  
-    private AudioManager audioPlays;
 
 
     
@@ -72,7 +70,7 @@ public class RefactoredAdvancedPlayerMovement : MonoBehaviour
          if(Input.GetKeyDown(KeyCode.E))
         {
             Attack();
-            audioPlays.PlayAttackSound();
+            AudioManager.instance.PlayAttackSound();
         }
     }
 
@@ -113,7 +111,7 @@ public class RefactoredAdvancedPlayerMovement : MonoBehaviour
 
         if(horizontalInput != 0 && grounded)
         {
-            audioPlays.PlayFootstepSound();
+            AudioManager.instance.PlayFootstepSound();
         }
         if((horizontalInput>0&& !facingRight)||(horizontalInput<0&&facingRight))
         {
@@ -144,11 +142,11 @@ public class RefactoredAdvancedPlayerMovement : MonoBehaviour
         body.velocity = new Vector2(body.velocity.x, jumpHeight);
         anim.SetTrigger("jump");
         grounded = false;
-        audioPlays.PlayJumpSound();
+        AudioManager.instance.PlayJumpSound();
     }
 
     IEnumerator Dash(){
-        audioPlays.PlayDashSound();
+        AudioManager.instance.PlayDashSound();
         float originalSpeed = speed; 
         speed = dashSpeed; 
         isDashing = true; 
