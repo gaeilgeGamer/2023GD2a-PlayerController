@@ -23,11 +23,6 @@ public class RefactoredAdvancedPlayerMovement : MonoBehaviour
     public bool grounded; 
     public float groundCheckRadius = 0.2f;
 
-    [Header("Sounds")]
-    public AudioClip jumpSound; 
-    public AudioClip dashSound; 
-    public AudioClip footstepSound; 
-
     [Header("Attack")]
     [SerializeField] private int attackDamage = 1;
     [SerializeField] private float attackRange = 1f;
@@ -35,9 +30,9 @@ public class RefactoredAdvancedPlayerMovement : MonoBehaviour
 
     
     private Rigidbody2D body; 
-    private Animator anim; 
-    private AudioSource audioPlayer; 
-    
+    private Animator anim;  
+    private AudioManager audioPlays;
+
 
     
     // Start is called before the first frame update
@@ -50,7 +45,6 @@ public class RefactoredAdvancedPlayerMovement : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        audioPlayer = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -78,6 +72,7 @@ public class RefactoredAdvancedPlayerMovement : MonoBehaviour
          if(Input.GetKeyDown(KeyCode.E))
         {
             Attack();
+            audioPlays.PlayAttackSound();
         }
     }
 
@@ -118,7 +113,7 @@ public class RefactoredAdvancedPlayerMovement : MonoBehaviour
 
         if(horizontalInput != 0 && grounded)
         {
-            PlaySound(footstepSound);
+            audioPlays.PlayFootstepSound();
         }
         if((horizontalInput>0&& !facingRight)||(horizontalInput<0&&facingRight))
         {
@@ -149,22 +144,17 @@ public class RefactoredAdvancedPlayerMovement : MonoBehaviour
         body.velocity = new Vector2(body.velocity.x, jumpHeight);
         anim.SetTrigger("jump");
         grounded = false;
-        PlaySound(jumpSound);
+        audioPlays.PlayJumpSound();
     }
 
     IEnumerator Dash(){
-        PlaySound(dashSound);
+        audioPlays.PlayDashSound();
         float originalSpeed = speed; 
         speed = dashSpeed; 
         isDashing = true; 
         yield return new WaitForSeconds(0.2f);
         speed = originalSpeed; 
         isDashing = false; 
-    }
-    private void PlaySound(AudioClip clip)
-    {
-        audioPlayer.clip = clip; 
-        audioPlayer.Play();
     }
     void Attack()
     {
