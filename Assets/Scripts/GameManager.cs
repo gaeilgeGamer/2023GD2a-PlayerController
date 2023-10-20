@@ -30,8 +30,19 @@ public class GameManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-        
+        if(isPaused)
+            ResumeGame();
+        else
+            PauseGame();
         }
+    if(Input.GetKeyDown(KeyCode.R))
+    {
+        RestartGame();
+    }
+    if(Input.GetKeyDown(KeyCode.Escape))
+    {
+        LoadMainMenu();
+    }
     }
 
     public void PauseGame()
